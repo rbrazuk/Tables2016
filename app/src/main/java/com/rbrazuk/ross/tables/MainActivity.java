@@ -7,12 +7,21 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    String mJson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ApiService apiService = new ApiService();
+
+        apiService.setOnJsonLoadedListener(new ApiService.OnJsonLoadedListener() {
+            @Override
+            public void onJsonLoaded(String json) {
+                System.out.println(json);
+            }
+        });
 
         try {
             apiService.run();
@@ -22,4 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
