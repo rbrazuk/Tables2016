@@ -10,16 +10,17 @@ import okhttp3.Response;
 
 public class ApiService {
 
-    public interface OnJsonLoadedListener {
-        void onJsonLoaded(String json);
-    }
+    private String apiKey = "95468454664049ca81f3fc478ede7ef2";
+    private String competitionsUrl = "http://api.football-data.org/v1/competitions";
 
     private OnJsonLoadedListener mOnJsonLoadedListener;
 
-    private String competitionsUrl = "http://api.football-data.org/v1/competitions";
-
     private final OkHttpClient mClient = new OkHttpClient();
-    Request request = new Request.Builder().url(competitionsUrl).addHeader("X-Auth-Token","95468454664049ca81f3fc478ede7ef2").build();
+    private final Request request = new Request.Builder().url(competitionsUrl).addHeader("X-Auth-Token", apiKey).build();
+
+    public interface OnJsonLoadedListener {
+        void onJsonLoaded(String json);
+    }
 
     public ApiService() {
         this.mOnJsonLoadedListener = null;
@@ -30,7 +31,6 @@ public class ApiService {
     }
 
     public void getCompetitionsJson() throws Exception {
-        Request request = new Request.Builder().url(competitionsUrl).addHeader("X-Auth-Token","95468454664049ca81f3fc478ede7ef2").build();
 
         mClient.newCall(request).enqueue(new Callback() {
             @Override
