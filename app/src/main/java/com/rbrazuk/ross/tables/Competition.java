@@ -25,4 +25,9 @@ public class Competition {
     public void setLeagueTable(String leagueTable) {
         mLeagueTable = leagueTable;
     }
+
+    @Override
+    public String toString() {
+        return this.mCaption + " " + this.mLeagueTable;
+    }
 }

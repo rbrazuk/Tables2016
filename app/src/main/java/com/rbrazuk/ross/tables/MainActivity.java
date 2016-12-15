@@ -26,7 +26,16 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray competitionsArray = new JSONArray(json);
 
-                    System.out.println(competitionsArray.get(0).toString());
+                    for (int i = 0; i < competitionsArray.length(); i++) {
+                        JSONObject comp = competitionsArray.getJSONObject(i);
+
+                        String leagueTableLink = comp.getJSONObject("_links").getJSONObject("leagueTable").getString("href");
+
+                        Competition competition = new Competition(comp.getString("caption"), leagueTableLink);
+
+                        System.out.println(competition.toString());
+
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -40,6 +49,4 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 }
