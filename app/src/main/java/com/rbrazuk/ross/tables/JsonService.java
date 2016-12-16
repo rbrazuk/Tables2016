@@ -16,9 +16,15 @@ public class JsonService {
         for (int i = 0; i < competitionsJsonArray.length(); i++) {
             JSONObject comp = competitionsJsonArray.getJSONObject(i);
 
-            String leagueTableLink = comp.getJSONObject("_links").getJSONObject("leagueTable").getString("href");
+            System.out.println("comp id: " + comp.getInt("id"));
 
-            competitionsArrayList.add(new Competition(comp.getString("caption"), leagueTableLink));
+            if (comp.getInt("id") != 424 && comp.getInt("id") != 440 && comp.getInt("id") != 432 ) {
+                String leagueTableLink = comp.getJSONObject("_links").getJSONObject("leagueTable").getString("href");
+
+                competitionsArrayList.add(new Competition(comp.getString("caption"), leagueTableLink, comp.getInt("id")));
+            }
+
+
         }
 
         System.out.println(competitionsArrayList.toString());

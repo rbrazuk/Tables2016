@@ -2,12 +2,17 @@ package com.rbrazuk.ross.tables;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class TableActivity extends AppCompatActivity {
 
@@ -16,10 +21,14 @@ public class TableActivity extends AppCompatActivity {
 
     private ArrayList<Team> mTeamsArrayList;
 
+    @BindView(R.id.rv_table) RecyclerView mTableRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
+
+        ButterKnife.bind(this);
 
         mApiService = new ApiService();
         mJsonService = new JsonService();
@@ -36,6 +45,7 @@ public class TableActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             System.out.println(mTeamsArrayList);
+                            setUpRecyclerView(mTeamsArrayList);
                         }
                     });
                 } catch (JSONException e) {
@@ -49,7 +59,11 @@ public class TableActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-
+    private void setUpRecyclerView(ArrayList<Team> teams) {
+        TableAdapter adapter = new TableAdapter(this, teams);
+        mTableRecyclerView.setAdapter(adapter);
+        mTableRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
