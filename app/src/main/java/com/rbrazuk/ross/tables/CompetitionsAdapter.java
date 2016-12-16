@@ -41,8 +41,7 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Competition competition = mCompetitions.get(position);
 
-        TextView competitionNameTextView = holder.mCompetitionNameTextView;
-        competitionNameTextView.setText(competition.getCaption());
+        holder.bindCompetition(competition);
     }
 
     @Override
@@ -50,14 +49,28 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
         return mCompetitions.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.tvCompetitionName) TextView mCompetitionNameTextView;
 
+        private Competition mCompetition;
+
+        public void bindCompetition(Competition competition) {
+            mCompetition = competition;
+            mCompetitionNameTextView.setText(mCompetition.getCaption());
+        }
+
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
             ButterKnife.bind(this, itemView);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }

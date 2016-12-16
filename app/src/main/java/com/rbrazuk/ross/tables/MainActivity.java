@@ -65,5 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         mCompetitionsRecyclerView.setAdapter(adapter);
         mCompetitionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
 }
