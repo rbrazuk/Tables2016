@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onJsonLoaded(String json)  {
                 try {
-                    mCompetitions = mJsonService.getCompetitionsArrayList(json);
+                    mCompetitions = mJsonService.parseCompetitionsJson(json);
 
                     runOnUiThread(new Runnable() {
                         @Override

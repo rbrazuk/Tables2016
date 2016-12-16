@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class JsonService {
 
-    public ArrayList<Competition> getCompetitionsArrayList(String json) throws JSONException {
+    public ArrayList<Competition> parseCompetitionsJson(String json) throws JSONException {
 
         JSONArray competitionsJsonArray = new JSONArray(json);
         ArrayList<Competition> competitionsArrayList = new ArrayList<>();
@@ -24,5 +24,19 @@ public class JsonService {
         System.out.println(competitionsArrayList.toString());
 
         return competitionsArrayList;
+    }
+
+    public ArrayList<Team> parseTableJson(String json) throws JSONException{
+        ArrayList<Team> tableArrayList = new ArrayList<>();
+        JSONObject tableObject = new JSONObject(json);
+        JSONArray tableJsonArray = tableObject.getJSONArray("standing");
+
+        for (int i = 0; i < tableJsonArray.length(); i++) {
+            JSONObject jsonTeam = tableJsonArray.getJSONObject(i);
+            Team team = new Team(jsonTeam.getString("teamName"), jsonTeam.getInt("position"), jsonTeam.getInt("points"));
+            tableArrayList.add(team);
+        }
+
+        return  tableArrayList;
     }
 }
