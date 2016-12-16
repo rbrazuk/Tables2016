@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
 
         @Override
         public void onClick(View view) {
-
+            Toast.makeText(view.getContext(), mCompetition.getLeagueTable(), Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -20,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private  JsonService mJsonService;
 
     private static ArrayList<Competition> mCompetitions;
+
+    private static final String COMPETITIONS_URL = "http://api.football-data.org/v1/competitions";
 
     @BindView(R.id.rvCompetitions) RecyclerView mCompetitionsRecyclerView;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         try {
-            mApiService.getCompetitionsJson();
+            mApiService.getJsonFromUrl(COMPETITIONS_URL);
         } catch (Exception e) {
             e.printStackTrace();
         }
